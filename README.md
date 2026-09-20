@@ -1,60 +1,60 @@
-# Kitchen Atlas — Home Assistant tablet dashboard
+# Kitchen Atlas — tabletový dashboard pro Home Assistant
 
-A custom, permanently dark Home Assistant dashboard designed for a landscape kitchen tablet. It uses one local Web Component instead of a grid of standard Lovelace cards.
+Vlastní trvale tmavý dashboard určený pro tablet položený na šířku. Hlavní pohled vykresluje lokální Web Component bez skládání běžných Lovelace karet.
 
-![Dashboard preview](docs/dashboard-preview.svg)
+[English version](README.en.md)
 
-## Highlights
+![Ukázka dashboardu](docs/dashboard-preview.svg)
 
-- responsive landscape layout tested at 960 × 600 and 1280 × 800 CSS pixels
-- clock with seconds, date, indoor/outdoor temperature and seven-day cost chart
-- three live camera areas, dimmable lights, appliance and household states
-- three server-side kitchen timers with notes, phone targets and a tablet alarm
-- custom notification-reason modal
-- no cloud assets, web fonts, tracking code or bundled credentials
+## Co obsahuje
 
-![Timer dialog](docs/timer-preview.svg)
-![Notification dialog](docs/call-preview.svg)
+- hodiny se sekundami, datum a vnitřní i venkovní teplotu
+- tři kamery, tři světla, spotřeby, teploty a stav domácnosti
+- tři kuchyňské minutky běžící v Home Assistantu
+- zvuk alarmu přímo na tabletu a volitelné mobilní notifikace
+- vlastní modal s důvody pro rychlé upozornění
+- tři pohledy: Tablet, Topení a Kamera
+- responzivní rozložení ověřené při 960 × 600 a 1280 × 800 CSS pixelech
+- žádné cloudové prvky, webová písma, sledovací kód ani přibalené přihlašovací údaje
 
-## Repository contents
+![Dialog minutky](docs/timer-preview.svg)
+![Dialog upozornění](docs/call-preview.svg)
 
-- `dashboard/dashboard-tablet.yaml` — anonymized three-view Lovelace dashboard
-- `www/kitchen-atlas.js` — the custom dashboard component
-- `packages/tablet_minutka.yaml` — optional timer helpers, script and automation
-- `docs/ENTITIES.md` — entity mapping and expected states
-- `docs/*.svg` — illustrative previews made with fictional data
+## Obsah repozitáře
 
-## Install
+- `dashboard/dashboard-tablet.yaml` — anonymizovaný Lovelace dashboard se třemi pohledy
+- `www/kitchen-atlas.js` — vlastní komponenta dashboardu
+- `packages/tablet_minutka.yaml` — volitelná konfigurace minutek, skript a automatizace
+- `docs/ENTITIES.md` — mapa entit a očekávaných stavů
+- `docs/*.svg` — ilustrační náhledy se smyšlenými údaji
 
-1. Copy `www/kitchen-atlas.js` to `/config/www/tablet-atlas/kitchen-atlas.js`.
-2. Add `/local/tablet-atlas/kitchen-atlas.js?v=1` as a **JavaScript Module** under Settings → Dashboards → Resources.
-3. Replace every `example_*` entity in both the YAML and JavaScript. See [the entity map](docs/ENTITIES.md).
-4. Create a YAML-mode dashboard and paste `dashboard/dashboard-tablet.yaml` into its raw configuration editor.
-5. For the timers, copy `packages/tablet_minutka.yaml` into your packages directory, enable packages in `configuration.yaml`, edit the two placeholder `notify.mobile_app_phone_*` services, validate configuration and restart Home Assistant.
-6. In `www/kitchen-atlas.js`, replace `mobile_app_phone_1` with the notification service used by the alert modal.
-7. Reload the tablet page. Increment the `?v=` resource parameter after later JavaScript updates.
+## Instalace
 
-Example packages configuration:
+1. Zkopírujte `www/kitchen-atlas.js` do `/config/www/tablet-atlas/kitchen-atlas.js`.
+2. V Nastavení → Nástěnky → Zdroje přidejte `/local/tablet-atlas/kitchen-atlas.js?v=1` jako JavaScript Module.
+3. Podle [docs/ENTITIES.md](docs/ENTITIES.md) nahraďte všechna `example_*` ID v YAML i JavaScriptu vlastními entitami.
+4. Vytvořte YAML dashboard a do editoru nezpracované konfigurace vložte `dashboard/dashboard-tablet.yaml`.
+5. Chcete-li minutky, zkopírujte `packages/tablet_minutka.yaml` do adresáře balíčků, povolte packages v `configuration.yaml`, změňte služby `notify.mobile_app_phone_1` a `notify.mobile_app_phone_2`, zkontrolujte konfiguraci a restartujte HA.
+6. Pro modal Upozornit změňte v `www/kitchen-atlas.js` zástupnou službu `mobile_app_phone_1`.
+7. Po změnách obnovte stránku; při další aktualizaci JS zvyšte parametr `?v=`.
 
 ```yaml
 homeassistant:
   packages: !include_dir_named packages
 ```
 
-The additional Heating view uses [multiple-entity-row](https://github.com/benct/lovelace-multiple-entity-row) and [card-mod](https://github.com/thomasloven/lovelace-card-mod). The main view needs only the bundled component and Home Assistant's camera stream element. For a fullscreen tablet view, [kiosk-mode](https://github.com/NemesisRE/kiosk-mode) is optional; append `?kiosk` to your own dashboard path.
+Pohled Topení používá [multiple-entity-row](https://github.com/benct/lovelace-multiple-entity-row) a [card-mod](https://github.com/thomasloven/lovelace-card-mod). Hlavní pohled potřebuje pouze přiloženou komponentu a kamerový prvek Home Assistantu. Pro režim celé obrazovky lze použít [kiosk-mode](https://github.com/NemesisRE/kiosk-mode) a k vlastní cestě dashboardu přidat `?kiosk`.
 
-## Privacy and safety
+## Soukromí a bezpečnost
 
-This repository contains fictional preview values and placeholder entity IDs. It contains no dashboard backups, live camera frames, LAN addresses, user IDs, notification targets, tokens or credentials. Review your own fork before publishing it because replacing placeholders can introduce private data.
+Ukázkové obrázky obsahují pouze smyšlené hodnoty a grafiku. Repozitář neobsahuje lokální adresy, živé kamery, uživatelská ID, cíle notifikací, tokeny, hesla ani zálohy Home Assistantu.
 
-The alert choices are intentionally easy to customize in `CALL_REASONS`. A tap sends immediately; there is no second confirmation.
+Před zveřejněním vlastní upravené verze ji znovu zkontrolujte, protože dosazením skutečných entit můžete přidat soukromé údaje. Možnosti v upozorňovacím dialogu lze upravit v `CALL_REASONS`; klepnutí na důvod odešle zprávu ihned bez dalšího potvrzení.
 
-## Language and customization
+## Jazyk a přizpůsobení
 
-The UI is Czech and the currency is CZK. Labels and entities are grouped near the top of `kitchen-atlas.js`. Date and time follow the Home Assistant time zone. Narrow portrait phones are outside the design target.
+Rozhraní je v češtině a používá měnu CZK. Popisky a entity jsou soustředěné poblíž začátku souboru `www/kitchen-atlas.js`. Datum a čas respektují časovou zónu Home Assistantu. Návrh je určený pro tablet na šířku, nikoli pro úzké telefony na výšku.
 
-Český návod je v [README.cs.md](README.cs.md).
+## Licence
 
-## License
-
-MIT — see [LICENSE](LICENSE).
+MIT — viz [LICENSE](LICENSE).
