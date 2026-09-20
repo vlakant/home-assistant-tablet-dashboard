@@ -2,7 +2,7 @@
 
 A custom, permanently dark Home Assistant dashboard designed for a landscape kitchen tablet. It uses one local Web Component instead of a grid of standard Lovelace cards.
 
-![Dashboard preview](docs/dashboard-preview.svg)
+![Actual dashboard layout with anonymized cameras and demo values](docs/dashboard-preview.png)
 
 ## Highlights
 
@@ -13,8 +13,8 @@ A custom, permanently dark Home Assistant dashboard designed for a landscape kit
 - custom notification-reason modal
 - no cloud assets, web fonts, tracking code or bundled credentials
 
-![Timer dialog](docs/timer-preview.svg)
-![Notification dialog](docs/call-preview.svg)
+![Actual timer dialog](docs/timer-preview.png)
+![Actual notification dialog](docs/call-preview.png)
 
 ## Repository contents
 
@@ -22,7 +22,7 @@ A custom, permanently dark Home Assistant dashboard designed for a landscape kit
 - `www/kitchen-atlas.js` — the custom dashboard component
 - `packages/tablet_minutka.yaml` — optional timer helpers, script and automation
 - `docs/ENTITIES.md` — entity mapping and expected states
-- `docs/*.svg` — illustrative previews made with fictional data
+- `docs/*.png` — previews rendered directly from the component with anonymized cameras and demo data
 
 ## Install
 
@@ -45,7 +45,7 @@ The additional Heating view uses [multiple-entity-row](https://github.com/benct/
 
 ## Privacy and safety
 
-This repository contains fictional preview values and placeholder entity IDs. It contains no dashboard backups, live camera frames, LAN addresses, user IDs, notification targets, tokens or credentials. Review your own fork before publishing it because replacing placeholders can introduce private data.
+The previews show the component's actual layout and dialogs with demo values; camera images are replaced by privacy masks. The repository contains no dashboard backups, live camera frames, LAN addresses, user IDs, notification targets, tokens or credentials. Review your own fork before publishing it because replacing placeholders can introduce private data.
 
 The alert choices are intentionally easy to customize in `CALL_REASONS`. A tap sends immediately; there is no second confirmation.
 

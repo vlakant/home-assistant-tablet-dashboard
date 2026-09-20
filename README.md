@@ -4,7 +4,7 @@ Vlastní trvale tmavý dashboard určený pro tablet položený na šířku. Hla
 
 [English version](README.en.md)
 
-![Ukázka dashboardu](docs/dashboard-preview.svg)
+![Skutečné rozložení dashboardu s anonymizovanými kamerami a ukázkovými hodnotami](docs/dashboard-preview.png)
 
 ## Co obsahuje
 
@@ -17,8 +17,8 @@ Vlastní trvale tmavý dashboard určený pro tablet položený na šířku. Hla
 - responzivní rozložení ověřené při 960 × 600 a 1280 × 800 CSS pixelech
 - žádné cloudové prvky, webová písma, sledovací kód ani přibalené přihlašovací údaje
 
-![Dialog minutky](docs/timer-preview.svg)
-![Dialog upozornění](docs/call-preview.svg)
+![Skutečný dialog minutky](docs/timer-preview.png)
+![Skutečný dialog upozornění](docs/call-preview.png)
 
 ## Obsah repozitáře
 
@@ -26,7 +26,7 @@ Vlastní trvale tmavý dashboard určený pro tablet položený na šířku. Hla
 - `www/kitchen-atlas.js` — vlastní komponenta dashboardu
 - `packages/tablet_minutka.yaml` — volitelná konfigurace minutek, skript a automatizace
 - `docs/ENTITIES.md` — mapa entit a očekávaných stavů
-- `docs/*.svg` — ilustrační náhledy se smyšlenými údaji
+- `docs/*.png` — náhledy vyrenderované přímo z komponenty s anonymizovanými kamerami a ukázkovými údaji
 
 ## Instalace
 
@@ -47,7 +47,7 @@ Pohled Topení používá [multiple-entity-row](https://github.com/benct/lovelac
 
 ## Soukromí a bezpečnost
 
-Ukázkové obrázky obsahují pouze smyšlené hodnoty a grafiku. Repozitář neobsahuje lokální adresy, živé kamery, uživatelská ID, cíle notifikací, tokeny, hesla ani zálohy Home Assistantu.
+Ukázkové obrázky zachycují skutečné rozložení a dialogy komponenty. Hodnoty jsou ukázkové a obraz kamer je nahrazen anonymní maskou. Repozitář neobsahuje lokální adresy, živé kamery, uživatelská ID, cíle notifikací, tokeny, hesla ani zálohy Home Assistantu.
 
 Před zveřejněním vlastní upravené verze ji znovu zkontrolujte, protože dosazením skutečných entit můžete přidat soukromé údaje. Možnosti v upozorňovacím dialogu lze upravit v `CALL_REASONS`; klepnutí na důvod odešle zprávu ihned bez dalšího potvrzení.
 
