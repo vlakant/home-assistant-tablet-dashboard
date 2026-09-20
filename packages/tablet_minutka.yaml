@@ -1,0 +1,355 @@
+# Optional timer package. Replace both notify.mobile_app_phone_* services.
+timer:
+  tablet_minutka_1:
+    name: "Tablet minutka 1"
+    duration: "00:10:00"
+    restore: true
+    icon: "mdi:timer-outline"
+  tablet_minutka_2:
+    name: "Tablet minutka 2"
+    duration: "00:10:00"
+    restore: true
+    icon: "mdi:timer-outline"
+  tablet_minutka_3:
+    name: "Tablet minutka 3"
+    duration: "00:10:00"
+    restore: true
+    icon: "mdi:timer-outline"
+input_text:
+  tablet_minutka_1_poznamka:
+    name: "Tablet minutka 1 poznamka"
+    min: 0
+    max: 120
+    mode: "text"
+  tablet_minutka_2_poznamka:
+    name: "Tablet minutka 2 poznamka"
+    min: 0
+    max: 120
+    mode: "text"
+  tablet_minutka_3_poznamka:
+    name: "Tablet minutka 3 poznamka"
+    min: 0
+    max: 120
+    mode: "text"
+input_select:
+  tablet_minutka_1_mobil:
+    name: "Tablet minutka 1 mobil"
+    options:
+      - "none"
+      - "phone_1"
+      - "phone_2"
+  tablet_minutka_1_stav:
+    name: "Tablet minutka 1 stav"
+    options:
+      - "ready"
+      - "running"
+      - "done"
+  tablet_minutka_2_mobil:
+    name: "Tablet minutka 2 mobil"
+    options:
+      - "none"
+      - "phone_1"
+      - "phone_2"
+  tablet_minutka_2_stav:
+    name: "Tablet minutka 2 stav"
+    options:
+      - "ready"
+      - "running"
+      - "done"
+  tablet_minutka_3_mobil:
+    name: "Tablet minutka 3 mobil"
+    options:
+      - "none"
+      - "phone_1"
+      - "phone_2"
+  tablet_minutka_3_stav:
+    name: "Tablet minutka 3 stav"
+    options:
+      - "ready"
+      - "running"
+      - "done"
+input_datetime:
+  tablet_minutka_1_konec:
+    name: "Tablet minutka 1 konec"
+    has_date: true
+    has_time: true
+  tablet_minutka_2_konec:
+    name: "Tablet minutka 2 konec"
+    has_date: true
+    has_time: true
+  tablet_minutka_3_konec:
+    name: "Tablet minutka 3 konec"
+    has_date: true
+    has_time: true
+script:
+  tablet_minutka_command:
+    alias: "Tablet minutka command"
+    description: "Tři kuchyňské minutky; serializované povely a dokončení. Spravováno projektem Tablet Dashboard."
+    mode: "queued"
+    max: 30
+    fields:
+      command:
+        required: true
+        selector:
+          select:
+            options:
+              - "start"
+              - "cancel"
+              - "extend"
+              - "finish"
+              - "snooze"
+      slot:
+        required: true
+        selector:
+          number:
+            min: 1
+            max: 3
+            mode: "box"
+      seconds:
+        selector:
+          number:
+            min: 1
+            max: 86400
+            mode: "box"
+      note:
+        selector:
+          text: {}
+      recipient:
+        selector:
+          select:
+            options:
+              - "phone_1"
+              - "phone_2"
+              - "none"
+      token:
+        selector:
+          text: {}
+    sequence:
+      -
+        condition: "template"
+        value_template: "{{ slot | int(0) in [1,2,3] }}"
+      -
+        variables:
+          n: "{{ slot | int }}"
+          timer_id: "timer.tablet_minutka_{{ slot | int }}"
+          note_id: "input_text.tablet_minutka_{{ slot | int }}_poznamka"
+          recipient_id: "input_select.tablet_minutka_{{ slot | int }}_mobil"
+          deadline_id: "input_datetime.tablet_minutka_{{ slot | int }}_konec"
+          phase_id: "input_select.tablet_minutka_{{ slot | int }}_stav"
+      -
+        choose:
+          -
+            conditions: "{{ command == 'start' }}"
+            sequence:
+              -
+                condition: "template"
+                value_template: "{{ seconds | int(0) >= 1 and seconds | int(0) <= 86400 and recipient | default('') in ['phone_1','phone_2','none'] and not is_state(phase_id,'running') }}"
+              -
+                action: "input_select.select_option"
+                target:
+                  entity_id: "{{ phase_id }}"
+                data:
+                  option: "ready"
+              -
+                action: "input_text.set_value"
+                target:
+                  entity_id: "{{ note_id }}"
+                data:
+                  value: "{{ (note | default('', true) | trim or ('Minutka ' ~ n))[:120] }}"
+              -
+                action: "input_select.select_option"
+                target:
+                  entity_id: "{{ recipient_id }}"
+                data:
+                  option: "{{ recipient }}"
+              -
+                action: "input_datetime.set_datetime"
+                target:
+                  entity_id: "{{ deadline_id }}"
+                data:
+                  timestamp: "{{ (as_timestamp(now()) + (seconds | int)) | int }}"
+              -
+                action: "timer.start"
+                target:
+                  entity_id: "{{ timer_id }}"
+                data:
+                  duration: "{{ seconds | int }}"
+              -
+                action: "input_select.select_option"
+                target:
+                  entity_id: "{{ phase_id }}"
+                data:
+                  option: "running"
+          -
+            conditions: "{{ command == 'cancel' }}"
+            sequence:
+              -
+                action: "input_select.select_option"
+                target:
+                  entity_id: "{{ phase_id }}"
+                data:
+                  option: "ready"
+              -
+                action: "timer.cancel"
+                target:
+                  entity_id: "{{ timer_id }}"
+                data: {}
+          -
+            conditions: "{{ command == 'extend' }}"
+            sequence:
+              -
+                condition: "template"
+                value_template: "{{ is_state(phase_id,'running') and is_state(timer_id,'active') and state_attr(deadline_id,'timestamp') | float(0) > as_timestamp(now()) }}"
+              -
+                variables:
+                  remaining: "{{ [1, (state_attr(deadline_id,'timestamp') | float(0) - as_timestamp(now())) | round(0,'ceil') | int] | max + 300 }}"
+              -
+                action: "input_datetime.set_datetime"
+                target:
+                  entity_id: "{{ deadline_id }}"
+                data:
+                  timestamp: "{{ (as_timestamp(now()) + (remaining | int)) | int }}"
+              -
+                action: "timer.start"
+                target:
+                  entity_id: "{{ timer_id }}"
+                data:
+                  duration: "{{ remaining | int }}"
+          -
+            conditions: "{{ command == 'finish' }}"
+            sequence:
+              -
+                condition: "template"
+                value_template: "{{ is_state(phase_id,'running') and state_attr(deadline_id,'timestamp') | float(0) > 0 and state_attr(deadline_id,'timestamp') | float(0) <= as_timestamp(now()) and not is_state(timer_id,'paused') }}"
+              -
+                choose:
+                  -
+                    conditions: "{{ is_state(recipient_id,'phone_1') }}"
+                    sequence:
+                      -
+                        action: "notify.mobile_app_phone_1"
+                        data:
+                          title: "Kuchyňská minutka"
+                          message: "{{ states(note_id) }}"
+                          data:
+                            tag: "tablet_minutka_{{ n }}_{{ state_attr(deadline_id, 'timestamp') | int }}"
+                            actions:
+                              -
+                                action: "TABLET_MINUTKA_PLUS5_{{ n }}_{{ state_attr(deadline_id, 'timestamp') | int }}"
+                                title: "Ještě 5 minut"
+                  -
+                    conditions: "{{ is_state(recipient_id,'phone_2') }}"
+                    sequence:
+                      -
+                        action: "notify.mobile_app_phone_2"
+                        data:
+                          title: "Kuchyňská minutka"
+                          message: "{{ states(note_id) }}"
+                          data:
+                            tag: "tablet_minutka_{{ n }}_{{ state_attr(deadline_id, 'timestamp') | int }}"
+                            actions:
+                              -
+                                action: "TABLET_MINUTKA_PLUS5_{{ n }}_{{ state_attr(deadline_id, 'timestamp') | int }}"
+                                title: "Ještě 5 minut"
+              -
+                action: "input_select.select_option"
+                target:
+                  entity_id: "{{ phase_id }}"
+                data:
+                  option: "done"
+          -
+            conditions: "{{ command == 'snooze' }}"
+            sequence:
+              -
+                condition: "template"
+                value_template: "{{ is_state(phase_id,'done') and token | int(0) > 0 and token | int(0) == state_attr(deadline_id,'timestamp') | int(0) }}"
+              -
+                action: "input_datetime.set_datetime"
+                target:
+                  entity_id: "{{ deadline_id }}"
+                data:
+                  timestamp: "{{ (as_timestamp(now()) + (300)) | int }}"
+              -
+                action: "timer.start"
+                target:
+                  entity_id: "{{ timer_id }}"
+                data:
+                  duration: "{{ 300 }}"
+              -
+                action: "input_select.select_option"
+                target:
+                  entity_id: "{{ phase_id }}"
+                data:
+                  option: "running"
+automation:
+  -
+    id: "tablet_minutka_events"
+    alias: "Tablet minutka events"
+    description: "Dokončení, obnova po restartu a tlačítko +5 minut. Spravováno projektem Tablet Dashboard."
+    mode: "queued"
+    max: 20
+    triggers:
+      -
+        trigger: "event"
+        event_type: "timer.finished"
+        event_data:
+          entity_id: "timer.tablet_minutka_1"
+        id: "finish"
+      -
+        trigger: "event"
+        event_type: "timer.finished"
+        event_data:
+          entity_id: "timer.tablet_minutka_2"
+        id: "finish"
+      -
+        trigger: "event"
+        event_type: "timer.finished"
+        event_data:
+          entity_id: "timer.tablet_minutka_3"
+        id: "finish"
+      -
+        trigger: "homeassistant"
+        event: "start"
+        id: "recover"
+      -
+        trigger: "time_pattern"
+        minutes: "/1"
+        id: "recover"
+      -
+        trigger: "event"
+        event_type: "mobile_app_notification_action"
+        id: "snooze"
+    actions:
+      -
+        choose:
+          -
+            conditions: "{{ trigger.id == 'snooze' }}"
+            sequence:
+              -
+                condition: "template"
+                value_template: "{{ trigger.event.data.action | default('') is match('^TABLET_MINUTKA_PLUS5_[1-3]_[0-9]+$') }}"
+              -
+                action: "script.turn_on"
+                target:
+                  entity_id: "script.tablet_minutka_command"
+                data:
+                  variables:
+                    command: "snooze"
+                    slot: "{{ trigger.event.data.action.split('_')[3] | int }}"
+                    token: "{{ trigger.event.data.action.split('_')[4] }}"
+        default:
+          -
+            repeat:
+              for_each:
+                - 1
+                - 2
+                - 3
+              sequence:
+                -
+                  action: "script.turn_on"
+                  target:
+                    entity_id: "script.tablet_minutka_command"
+                  data:
+                    variables:
+                      command: "finish"
+                      slot: "{{ repeat.item }}"
