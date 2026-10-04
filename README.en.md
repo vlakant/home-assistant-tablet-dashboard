@@ -50,7 +50,7 @@ The alert choices are intentionally easy to customize in `CALL_REASONS`. A tap s
 
 ## Language and customization
 
-The UI is Czech and the currency is CZK. Labels and entities are grouped near the top of `kitchen-atlas.js`. Date and time follow the Home Assistant time zone. Narrow portrait phones are outside the design target.
+The UI is Czech and the currency is CZK. Labels and entities are grouped near the top of `kitchen-atlas.js`. Date and time follow the Home Assistant time zone. The layout adapts to tablets and phones in portrait and landscape.
 
 Český návod je hlavní [README.md](README.md).
 
@@ -68,3 +68,7 @@ MIT — see [LICENSE](LICENSE).
 ![Cellar controls / Ovládání sklepa](docs/cellar-preview.jpg)
 
 The dashboard contains only the main page. Separate Heating and Camera tabs were removed; their controls are available in main-page dialogs.
+
+## Version 1.2
+
+Portrait phones stack panels vertically and cameras scroll horizontally. Touch controls and dialogs adapt to small screens. Browser verified at 393, 852 and 960 CSS pixel widths.

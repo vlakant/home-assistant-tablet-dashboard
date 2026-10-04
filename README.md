@@ -52,7 +52,7 @@ Před zveřejněním vlastní upravené verze ji znovu zkontrolujte, protože do
 
 ## Jazyk a přizpůsobení
 
-Rozhraní je v češtině a používá měnu CZK. Popisky a entity jsou soustředěné poblíž začátku souboru `www/kitchen-atlas.js`. Datum a čas respektují časovou zónu Home Assistantu. Návrh je určený pro tablet na šířku, nikoli pro úzké telefony na výšku.
+Rozhraní je v češtině a používá měnu CZK. Popisky a entity jsou soustředěné poblíž začátku souboru `www/kitchen-atlas.js`. Datum a čas respektují časovou zónu Home Assistantu. Rozložení se přizpůsobuje tabletu i telefonu na výšku a na šířku.
 
 ## Licence
 
@@ -68,3 +68,7 @@ MIT — viz [LICENSE](LICENSE).
 ![Cellar controls / Ovládání sklepa](docs/cellar-preview.jpg)
 
 Dashboard obsahuje pouze hlavní stránku. Samostatné záložky Topení a Kamera byly odstraněny; jejich ovládání je dostupné v modalech hlavní stránky.
+
+## Aktualizace 1.2
+
+Telefon na výšku skládá panely pod sebe a kamery lze posouvat do stran. Dotykové ovladače a dialogy se přizpůsobují malé obrazovce. Ověřeno v prohlížeči na šířkách 393, 852 a 960 CSS pixelů; skutečné zařízení může vyžadovat obnovení stránky.
