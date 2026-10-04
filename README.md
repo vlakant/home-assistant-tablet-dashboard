@@ -62,7 +62,7 @@ MIT — viz [LICENSE](LICENSE).
 ## Aktualizace 1.1
 
 - Karta Sklep rozlišuje chodbu a čtyři místnosti; stálá ikona pohybu se při detekci probarví. Klepnutí otevře samostatné ovládání pěti světel.
-- Okénko Kotel otevírá hlavní termostat, aktuální a cílovou teplotu, zapnutí/vypnutí a historii teplot i skutečného plamene za 24 hodin nebo 7 dní. Grafy používají vestavěné history-graph karty HA.
+- Okénko Kotel otevírá hlavní termostat, aktuální a cílovou teplotu, zapnutí/vypnutí a historii teplot i modulace hořáku v procentech za 24 hodin nebo 7 dní. Grafy používají vestavěné history-graph karty HA.
 - Volitelný balíček `packages/cellar_lights.yaml` po hodině souvislého svícení v místnosti odešle interaktivní notifikaci ANO/NE; chodbu nesleduje. ANO vypne pouze danou místnost, NE ponechá světlo svítit. Na iPhonu zobrazíte akce podržením notifikace. Nahraďte služby a entity podle mapy, zapněte packages a ověřte konfiguraci před restartem HA. Restart/reload resetuje časové čekání a čekající reakce.
 - `HEATING_ENTITY`, `CELLAR_LIGHTS` a `CELLAR_MOTION` v JS slouží k vlastnímu mapování. Ovládání teploty dodržuje meze termostatu a platnou změnu odešle automaticky po krátké pauze.
 
