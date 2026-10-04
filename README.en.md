@@ -18,7 +18,7 @@ A custom, permanently dark Home Assistant dashboard designed for a landscape kit
 
 ## Repository contents
 
-- `dashboard/dashboard-tablet.yaml` — anonymized three-view Lovelace dashboard
+- `dashboard/dashboard-tablet.yaml` — anonymized single-view Lovelace dashboard
 - `www/kitchen-atlas.js` — the custom dashboard component
 - `packages/tablet_minutka.yaml` — optional timer helpers, script and automation
 - `docs/ENTITIES.md` — entity mapping and expected states
@@ -41,7 +41,6 @@ homeassistant:
   packages: !include_dir_named packages
 ```
 
-The additional Heating view uses [multiple-entity-row](https://github.com/benct/lovelace-multiple-entity-row) and [card-mod](https://github.com/thomasloven/lovelace-card-mod). The main view needs only the bundled component and Home Assistant's camera stream element. For a fullscreen tablet view, [kiosk-mode](https://github.com/NemesisRE/kiosk-mode) is optional; append `?kiosk` to your own dashboard path.
 
 ## Privacy and safety
 
@@ -67,3 +66,5 @@ MIT — see [LICENSE](LICENSE).
 - Map `HEATING_ENTITY`, `CELLAR_LIGHTS` and `CELLAR_MOTION` to your own devices.
 
 ![Cellar controls / Ovládání sklepa](docs/cellar-preview.jpg)
+
+The dashboard contains only the main page. Separate Heating and Camera tabs were removed; their controls are available in main-page dialogs.

@@ -13,7 +13,7 @@ Vlastní trvale tmavý dashboard určený pro tablet položený na šířku. Hla
 - tři kuchyňské minutky běžící v Home Assistantu
 - zvuk alarmu přímo na tabletu a volitelné mobilní notifikace
 - vlastní modal s důvody pro rychlé upozornění
-- tři pohledy: Tablet, Topení a Kamera
+- jediný hlavní pohled Tablet; ovládání topení a kamery se otevírá v modalech
 - responzivní rozložení ověřené při 960 × 600 a 1280 × 800 CSS pixelech
 - žádné cloudové prvky, webová písma, sledovací kód ani přibalené přihlašovací údaje
 
@@ -22,7 +22,7 @@ Vlastní trvale tmavý dashboard určený pro tablet položený na šířku. Hla
 
 ## Obsah repozitáře
 
-- `dashboard/dashboard-tablet.yaml` — anonymizovaný Lovelace dashboard se třemi pohledy
+- `dashboard/dashboard-tablet.yaml` — anonymizovaný Lovelace dashboard s jedním hlavním pohledem
 - `www/kitchen-atlas.js` — vlastní komponenta dashboardu
 - `packages/tablet_minutka.yaml` — volitelná konfigurace minutek, skript a automatizace
 - `docs/ENTITIES.md` — mapa entit a očekávaných stavů
@@ -43,7 +43,6 @@ homeassistant:
   packages: !include_dir_named packages
 ```
 
-Pohled Topení používá [multiple-entity-row](https://github.com/benct/lovelace-multiple-entity-row) a [card-mod](https://github.com/thomasloven/lovelace-card-mod). Hlavní pohled potřebuje pouze přiloženou komponentu a kamerový prvek Home Assistantu. Pro režim celé obrazovky lze použít [kiosk-mode](https://github.com/NemesisRE/kiosk-mode) a k vlastní cestě dashboardu přidat `?kiosk`.
 
 ## Soukromí a bezpečnost
 
@@ -67,3 +66,5 @@ MIT — viz [LICENSE](LICENSE).
 - `HEATING_ENTITY`, `CELLAR_LIGHTS` a `CELLAR_MOTION` v JS slouží k vlastnímu mapování. Ovládání teploty dodržuje meze termostatu a platnou změnu odešle automaticky po krátké pauze.
 
 ![Cellar controls / Ovládání sklepa](docs/cellar-preview.jpg)
+
+Dashboard obsahuje pouze hlavní stránku. Samostatné záložky Topení a Kamera byly odstraněny; jejich ovládání je dostupné v modalech hlavní stránky.
