@@ -1,0 +1,314 @@
+# Optional cellar reminders. Replace example_* lights and notify.mobile_app_phone_1.
+automation:
+  -
+    id: "example_cellar_reminder_1"
+    alias: "Sklep - místnost 1 - upozornění"
+    description: "Upozornění po jedné hodině; chodba vyloučena."
+    triggers:
+      -
+        trigger: "state"
+        entity_id: "switch.example_cellar_room_1"
+        to: "on"
+        for:
+          hours: 1
+    conditions: []
+    actions:
+      -
+        variables:
+          room: "{{ trigger.entity_id }}"
+          room_name: "{{ state_attr(trigger.entity_id, \"friendly_name\") }}"
+          action_off: "{{ \"CELLAR_OFF_\" ~ context.id }}"
+          action_keep: "{{ \"CELLAR_KEEP_\" ~ context.id }}"
+          notification_tag: "{{ \"cellar_\" ~ context.id }}"
+      -
+        action: "notify.mobile_app_phone_1"
+        data:
+          title: "Ve sklepě se dlouho svítí"
+          message: "{{ room_name }}: chcete zhasnout?"
+          data:
+            tag: "{{ notification_tag }}"
+            actions:
+              -
+                action: "{{ action_keep }}"
+                title: "NE"
+              -
+                action: "{{ action_off }}"
+                title: "ANO"
+                destructive: true
+      -
+        wait_for_trigger:
+          -
+            trigger: "event"
+            event_type: "mobile_app_notification_action"
+            event_data:
+              action: "{{ action_off }}"
+          -
+            trigger: "event"
+            event_type: "mobile_app_notification_action"
+            event_data:
+              action: "{{ action_keep }}"
+          -
+            trigger: "state"
+            entity_id: "switch.example_cellar_room_1"
+            from: "on"
+        timeout:
+          hours: 24
+        continue_on_timeout: false
+      -
+        choose:
+          -
+            conditions:
+              -
+                condition: "template"
+                value_template: "{{ wait.trigger.platform == \"event\" and wait.trigger.event.data.action == action_off }}"
+              -
+                condition: "template"
+                value_template: "{{ is_state(room, \"on\") }}"
+            sequence:
+              -
+                action: "switch.turn_off"
+                target:
+                  entity_id: "{{ room }}"
+      -
+        action: "notify.mobile_app_phone_1"
+        data:
+          message: "clear_notification"
+          data:
+            tag: "{{ notification_tag }}"
+    mode: "parallel"
+    max: 20
+    max_exceeded: "warning"
+  -
+    id: "example_cellar_reminder_2"
+    alias: "Sklep - místnost 2 - upozornění"
+    description: "Upozornění po jedné hodině; chodba vyloučena."
+    triggers:
+      -
+        trigger: "state"
+        entity_id: "switch.example_cellar_room_2"
+        to: "on"
+        for:
+          hours: 1
+    conditions: []
+    actions:
+      -
+        variables:
+          room: "{{ trigger.entity_id }}"
+          room_name: "{{ state_attr(trigger.entity_id, \"friendly_name\") }}"
+          action_off: "{{ \"CELLAR_OFF_\" ~ context.id }}"
+          action_keep: "{{ \"CELLAR_KEEP_\" ~ context.id }}"
+          notification_tag: "{{ \"cellar_\" ~ context.id }}"
+      -
+        action: "notify.mobile_app_phone_1"
+        data:
+          title: "Ve sklepě se dlouho svítí"
+          message: "{{ room_name }}: chcete zhasnout?"
+          data:
+            tag: "{{ notification_tag }}"
+            actions:
+              -
+                action: "{{ action_keep }}"
+                title: "NE"
+              -
+                action: "{{ action_off }}"
+                title: "ANO"
+                destructive: true
+      -
+        wait_for_trigger:
+          -
+            trigger: "event"
+            event_type: "mobile_app_notification_action"
+            event_data:
+              action: "{{ action_off }}"
+          -
+            trigger: "event"
+            event_type: "mobile_app_notification_action"
+            event_data:
+              action: "{{ action_keep }}"
+          -
+            trigger: "state"
+            entity_id: "switch.example_cellar_room_2"
+            from: "on"
+        timeout:
+          hours: 24
+        continue_on_timeout: false
+      -
+        choose:
+          -
+            conditions:
+              -
+                condition: "template"
+                value_template: "{{ wait.trigger.platform == \"event\" and wait.trigger.event.data.action == action_off }}"
+              -
+                condition: "template"
+                value_template: "{{ is_state(room, \"on\") }}"
+            sequence:
+              -
+                action: "switch.turn_off"
+                target:
+                  entity_id: "{{ room }}"
+      -
+        action: "notify.mobile_app_phone_1"
+        data:
+          message: "clear_notification"
+          data:
+            tag: "{{ notification_tag }}"
+    mode: "parallel"
+    max: 20
+    max_exceeded: "warning"
+  -
+    id: "example_cellar_reminder_3"
+    alias: "Sklep - místnost 3 - upozornění"
+    description: "Upozornění po jedné hodině; chodba vyloučena."
+    triggers:
+      -
+        trigger: "state"
+        entity_id: "switch.example_cellar_room_3"
+        to: "on"
+        for:
+          hours: 1
+    conditions: []
+    actions:
+      -
+        variables:
+          room: "{{ trigger.entity_id }}"
+          room_name: "{{ state_attr(trigger.entity_id, \"friendly_name\") }}"
+          action_off: "{{ \"CELLAR_OFF_\" ~ context.id }}"
+          action_keep: "{{ \"CELLAR_KEEP_\" ~ context.id }}"
+          notification_tag: "{{ \"cellar_\" ~ context.id }}"
+      -
+        action: "notify.mobile_app_phone_1"
+        data:
+          title: "Ve sklepě se dlouho svítí"
+          message: "{{ room_name }}: chcete zhasnout?"
+          data:
+            tag: "{{ notification_tag }}"
+            actions:
+              -
+                action: "{{ action_keep }}"
+                title: "NE"
+              -
+                action: "{{ action_off }}"
+                title: "ANO"
+                destructive: true
+      -
+        wait_for_trigger:
+          -
+            trigger: "event"
+            event_type: "mobile_app_notification_action"
+            event_data:
+              action: "{{ action_off }}"
+          -
+            trigger: "event"
+            event_type: "mobile_app_notification_action"
+            event_data:
+              action: "{{ action_keep }}"
+          -
+            trigger: "state"
+            entity_id: "switch.example_cellar_room_3"
+            from: "on"
+        timeout:
+          hours: 24
+        continue_on_timeout: false
+      -
+        choose:
+          -
+            conditions:
+              -
+                condition: "template"
+                value_template: "{{ wait.trigger.platform == \"event\" and wait.trigger.event.data.action == action_off }}"
+              -
+                condition: "template"
+                value_template: "{{ is_state(room, \"on\") }}"
+            sequence:
+              -
+                action: "switch.turn_off"
+                target:
+                  entity_id: "{{ room }}"
+      -
+        action: "notify.mobile_app_phone_1"
+        data:
+          message: "clear_notification"
+          data:
+            tag: "{{ notification_tag }}"
+    mode: "parallel"
+    max: 20
+    max_exceeded: "warning"
+  -
+    id: "example_cellar_reminder_4"
+    alias: "Sklep - místnost 4 - upozornění"
+    description: "Upozornění po jedné hodině; chodba vyloučena."
+    triggers:
+      -
+        trigger: "state"
+        entity_id: "switch.example_cellar_room_4"
+        to: "on"
+        for:
+          hours: 1
+    conditions: []
+    actions:
+      -
+        variables:
+          room: "{{ trigger.entity_id }}"
+          room_name: "{{ state_attr(trigger.entity_id, \"friendly_name\") }}"
+          action_off: "{{ \"CELLAR_OFF_\" ~ context.id }}"
+          action_keep: "{{ \"CELLAR_KEEP_\" ~ context.id }}"
+          notification_tag: "{{ \"cellar_\" ~ context.id }}"
+      -
+        action: "notify.mobile_app_phone_1"
+        data:
+          title: "Ve sklepě se dlouho svítí"
+          message: "{{ room_name }}: chcete zhasnout?"
+          data:
+            tag: "{{ notification_tag }}"
+            actions:
+              -
+                action: "{{ action_keep }}"
+                title: "NE"
+              -
+                action: "{{ action_off }}"
+                title: "ANO"
+                destructive: true
+      -
+        wait_for_trigger:
+          -
+            trigger: "event"
+            event_type: "mobile_app_notification_action"
+            event_data:
+              action: "{{ action_off }}"
+          -
+            trigger: "event"
+            event_type: "mobile_app_notification_action"
+            event_data:
+              action: "{{ action_keep }}"
+          -
+            trigger: "state"
+            entity_id: "switch.example_cellar_room_4"
+            from: "on"
+        timeout:
+          hours: 24
+        continue_on_timeout: false
+      -
+        choose:
+          -
+            conditions:
+              -
+                condition: "template"
+                value_template: "{{ wait.trigger.platform == \"event\" and wait.trigger.event.data.action == action_off }}"
+              -
+                condition: "template"
+                value_template: "{{ is_state(room, \"on\") }}"
+            sequence:
+              -
+                action: "switch.turn_off"
+                target:
+                  entity_id: "{{ room }}"
+      -
+        action: "notify.mobile_app_phone_1"
+        data:
+          message: "clear_notification"
+          data:
+            tag: "{{ notification_tag }}"
+    mode: "parallel"
+    max: 20
+    max_exceeded: "warning"

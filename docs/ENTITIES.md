@@ -33,6 +33,14 @@ Every `example_*` ID is a placeholder. Replace it in both `dashboard/dashboard-t
 | `sensor.example_washer_remaining_minutes` | Washer remaining minutes |
 | `sensor.example_dryer_state` | Dryer state |
 | `sensor.example_dryer_remaining_minutes` | Dryer remaining minutes |
+| `switch.example_cellar_hall` | Cellar hall light |
+| `switch.example_cellar_room_1` | Cellar room light 1 |
+| `switch.example_cellar_room_2` | Cellar room light 2 |
+| `switch.example_cellar_room_3` | Cellar room light 3 |
+| `switch.example_cellar_room_4` | Cellar room light 4 |
+| `binary_sensor.example_cellar_motion_1` | Cellar motion sensor 1 |
+| `binary_sensor.example_cellar_motion_2` | Cellar motion sensor 2 |
+| `binary_sensor.example_flame_active` | Actual burner flame state |
 | `switch.example_light_4` | Switch controlled light |
 | `binary_sensor.example_internet_online` | Internet connectivity |
 | `binary_sensor.example_low_tariff` | Low tariff state |

@@ -2,7 +2,7 @@
 
 A custom, permanently dark Home Assistant dashboard designed for a landscape kitchen tablet. It uses one local Web Component instead of a grid of standard Lovelace cards.
 
-![Actual dashboard layout with anonymized cameras and demo values](docs/dashboard-preview.png)
+![Actual dashboard layout with anonymized cameras and demo values](docs/dashboard-preview.jpg)
 
 ## Highlights
 
@@ -58,3 +58,12 @@ The UI is Czech and the currency is CZK. Labels and entities are grouped near th
 ## License
 
 MIT — see [LICENSE](LICENSE).
+
+## Version 1.1
+
+- Cellar tile aggregates a hall and four room lights, shows a permanent motion icon that changes color, and opens five independent controls.
+- Heating tile opens the main thermostat with automatic temperature updates after a short pause, heat/off controls and native HA temperature/flame history for 24 hours or 7 days.
+- Optional `packages/cellar_lights.yaml` sends per-room actionable notifications after one continuous hour on. YES turns off that room; NO leaves it on. Hall excluded. Configure placeholder entities and the phone service, enable packages, validate and restart HA. On iOS hold the notification to reveal actions. Restart/reload resets pending timers and action waits.
+- Map `HEATING_ENTITY`, `CELLAR_LIGHTS` and `CELLAR_MOTION` to your own devices.
+
+![Cellar controls / Ovládání sklepa](docs/cellar-preview.jpg)
