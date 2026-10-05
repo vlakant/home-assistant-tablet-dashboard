@@ -4,6 +4,7 @@ Every `example_*` ID is a placeholder. Replace it in both `dashboard/dashboard-t
 
 | Placeholder | Purpose |
 | --- | --- |
+| `weather.example_weather` | Aktuální počasí |
 | `sensor.example_room_1_battery` | Baterie teploměru % |
 | `sensor.example_room_2_battery` | Baterie teploměru % |
 | `sensor.example_fridge_battery` | Baterie teploměru % |
