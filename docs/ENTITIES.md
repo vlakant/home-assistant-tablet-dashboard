@@ -4,6 +4,10 @@ Every `example_*` ID is a placeholder. Replace it in both `dashboard/dashboard-t
 
 | Placeholder | Purpose |
 | --- | --- |
+| `sensor.example_room_1_battery` | Baterie teploměru % |
+| `sensor.example_room_2_battery` | Baterie teploměru % |
+| `sensor.example_fridge_battery` | Baterie teploměru % |
+| `sensor.example_freezer_battery` | Baterie teploměru % |
 | `light.example_light_1` | Dimmable light 1 |
 | `light.example_light_2` | Dimmable light 2 |
 | `light.example_light_3` | Dimmable light 3 |
