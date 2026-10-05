@@ -2,6 +2,8 @@
 /* Kitchen Atlas — a local Home Assistant custom card. No external assets. */
 const ATLAS_VERSION='public-1.2.0';
 const ATLAS_ICONS={
+ boy:'M8 6c0-3 8-3 8 0v3a4 4 0 0 1-8 0V6Zm0 1 3-2 2 2 3-1M5 21v-2a7 7 0 0 1 14 0v2',
+ girl:'M8 7c0-5 8-5 8 0v2a4 4 0 0 1-8 0V7Zm0 0 4-2 4 2M8 6C5 5 4 8 5 11l3-2m8-3c3-1 4 2 3 5l-3-2M5 21v-2a7 7 0 0 1 14 0v2',
  batteryMini:'M3 6h15v12H3ZM18 10h3v4h-3M6 9v6m3-6v6m3-6v6',
  run:'M16 4a2 2 0 1 1-4 0 2 2 0 0 1 4 0M8 10l4-3 4 4 4 1M12 7l-2 7 5 3-1 5M10 14l-4 5H2',
  timer:'M9 2h6M12 2v4m6.3 2.7 1.4-1.4M20 14a8 8 0 1 1-16 0 8 8 0 0 1 16 0M12 10v4l3 2',
@@ -9,7 +11,7 @@ const ATLAS_ICONS={
 const ai=(name)=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${ATLAS_ICONS[name]||ATLAS_ICONS.home}"/></svg>`;
 const LIGHTS=[['light.example_light_1','Světlo 1','Pracovní plocha'],['light.example_light_2','Světlo 2','Nad stolem'],['light.example_light_3','Světlo 3','Pokoj']];
 const CAMERAS=[['camera.example_camera_1','Kamera 1'],['camera.example_camera_2','Kamera 2'],['camera.example_camera_3','Kamera 3']];
-const TEMPS=[['sensor.example_room_1_temperature','Pokoj 1','person','sensor.example_room_1_humidity','sensor.example_room_1_battery'],['sensor.example_room_2_temperature','Pokoj 2','person','sensor.example_room_2_humidity','sensor.example_room_2_battery'],['sensor.example_fridge_temperature','Lednice','fridge',null,'sensor.example_fridge_battery'],['sensor.example_freezer_temperature','Mrazák','snow',null,'sensor.example_freezer_battery']];
+const TEMPS=[['sensor.example_room_1_temperature','Pokoj 1','boy','sensor.example_room_1_humidity','sensor.example_room_1_battery'],['sensor.example_room_2_temperature','Pokoj 2','girl','sensor.example_room_2_humidity','sensor.example_room_2_battery'],['sensor.example_fridge_temperature','Lednice','fridge',null,'sensor.example_fridge_battery'],['sensor.example_freezer_temperature','Mrazák','snow',null,'sensor.example_freezer_battery']];
 const STATUS=[['binary_sensor.example_heating_active','Kotel','flame'],['binary_sensor.example_window_open','Okno','window'],['sensor.example_washer_state','Pračka','washer'],['sensor.example_dryer_state','Sušička','washer'],['switch.example_cellar_hall','Sklep','bulb'],['binary_sensor.example_internet_online','Internet','wifi'],['binary_sensor.example_low_tariff','Noční proud','bolt'],['switch.example_pool_filter','Filtrace','pool'],['sensor.example_tablet_battery','Tablet','battery'],['input_boolean.example_bin_ready','Popelnice','bin'],['input_boolean.example_bio_bin_ready','BIO','leaf'],['input_button.example_notification_button','Upozornit','phone']];
 const HEATING_ENTITY='climate.example_thermostat';
 const CELLAR_LIGHTS=[['switch.example_cellar_hall','Chodba'],['switch.example_cellar_room_1','Místnost 1'],['switch.example_cellar_room_2','Místnost 2'],['switch.example_cellar_room_3','Místnost 3'],['switch.example_cellar_room_4','Místnost 4']];
