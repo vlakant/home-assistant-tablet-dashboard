@@ -47,6 +47,7 @@ Every `example_*` ID is a placeholder. Replace it in both `dashboard/dashboard-t
 | `switch.example_pool_filter` | Filter switch |
 | `sensor.example_pool_temperature` | Water temperature |
 | `sensor.example_tablet_battery` | Tablet battery |
+| `binary_sensor.example_tablet_plugged_in` | Tablet external power connection |
 | `input_boolean.example_bin_ready` | Bin reminder |
 | `input_boolean.example_bio_bin_ready` | Bio bin reminder |
 | `input_button.example_notification_button` | Notification modal trigger |
