@@ -2,10 +2,11 @@
 
 A custom, permanently dark Home Assistant dashboard designed for a landscape kitchen tablet. It uses one local Web Component instead of a grid of standard Lovelace cards.
 
-![Actual dashboard layout with anonymized cameras and demo values](docs/dashboard-preview.jpg)
+![Actual dashboard layout with anonymized cameras and demo values](docs/dashboard-preview.png)
 
 ## Highlights
 
+- interactive seven-day chart: select a day to show its consumption and costs; Today returns to live readings
 - responsive landscape layout tested at 960 × 600 and 1280 × 800 CSS pixels
 - clock with seconds, date, indoor/outdoor temperature and seven-day cost chart
 - three live camera areas, dimmable lights, appliance and household states

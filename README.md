@@ -4,10 +4,11 @@ Vlastní trvale tmavý dashboard určený pro tablet položený na šířku. Hla
 
 [English version](README.en.md)
 
-![Skutečné rozložení dashboardu s anonymizovanými kamerami a ukázkovými hodnotami](docs/dashboard-preview.jpg)
+![Skutečné rozložení dashboardu s anonymizovanými kamerami a ukázkovými hodnotami](docs/dashboard-preview.png)
 
 ## Co obsahuje
 
+- interaktivní sedmidenní graf: klepnutí na den zobrazí jeho spotřeby a náklady; tlačítko Dnes vrátí živé údaje
 - hodiny se sekundami, datum a vnitřní i venkovní teplotu
 - tři kamery, tři světla, spotřeby, teploty a stav domácnosti
 - tři kuchyňské minutky běžící v Home Assistantu
