@@ -17,7 +17,7 @@ automation:
     mode: "single"
   -
     id: "example_motion_off_1"
-    alias: "Room 1 - off after four minutes clear"
+    alias: "Room 1 - off after three minutes clear"
     triggers:
       -
         trigger: "state"
@@ -42,7 +42,7 @@ automation:
         state: "on"
       -
         delay:
-          minutes: 4
+          minutes: 3
       -
         condition: "state"
         entity_id: "binary_sensor.example_room_1_motion"
@@ -73,7 +73,7 @@ automation:
     mode: "single"
   -
     id: "example_motion_off_2"
-    alias: "Room 2 - off after four minutes clear"
+    alias: "Room 2 - off after three minutes clear"
     triggers:
       -
         trigger: "state"
@@ -98,7 +98,7 @@ automation:
         state: "on"
       -
         delay:
-          minutes: 4
+          minutes: 3
       -
         condition: "state"
         entity_id: "binary_sensor.example_room_2_motion"
