@@ -1,0 +1,114 @@
+# Optional motion lights. Replace both example_room_N_motion and example_room_N_light entities.
+automation:
+  -
+    id: "example_motion_on_1"
+    alias: "Room 1 - motion light on"
+    triggers:
+      -
+        trigger: "state"
+        entity_id: "binary_sensor.example_room_1_motion"
+        to: "on"
+    conditions: []
+    actions:
+      -
+        action: "switch.turn_on"
+        target:
+          entity_id: "switch.example_room_1_light"
+    mode: "single"
+  -
+    id: "example_motion_off_1"
+    alias: "Room 1 - off after four minutes clear"
+    triggers:
+      -
+        trigger: "state"
+        entity_id: "binary_sensor.example_room_1_motion"
+        to: null
+      -
+        trigger: "state"
+        entity_id: "switch.example_room_1_light"
+        to: "on"
+      -
+        trigger: "homeassistant"
+        event: "start"
+    conditions: []
+    actions:
+      -
+        condition: "state"
+        entity_id: "binary_sensor.example_room_1_motion"
+        state: "off"
+      -
+        condition: "state"
+        entity_id: "switch.example_room_1_light"
+        state: "on"
+      -
+        delay:
+          minutes: 4
+      -
+        condition: "state"
+        entity_id: "binary_sensor.example_room_1_motion"
+        state: "off"
+      -
+        condition: "state"
+        entity_id: "switch.example_room_1_light"
+        state: "on"
+      -
+        action: "switch.turn_off"
+        target:
+          entity_id: "switch.example_room_1_light"
+    mode: "restart"
+  -
+    id: "example_motion_on_2"
+    alias: "Room 2 - motion light on"
+    triggers:
+      -
+        trigger: "state"
+        entity_id: "binary_sensor.example_room_2_motion"
+        to: "on"
+    conditions: []
+    actions:
+      -
+        action: "switch.turn_on"
+        target:
+          entity_id: "switch.example_room_2_light"
+    mode: "single"
+  -
+    id: "example_motion_off_2"
+    alias: "Room 2 - off after four minutes clear"
+    triggers:
+      -
+        trigger: "state"
+        entity_id: "binary_sensor.example_room_2_motion"
+        to: null
+      -
+        trigger: "state"
+        entity_id: "switch.example_room_2_light"
+        to: "on"
+      -
+        trigger: "homeassistant"
+        event: "start"
+    conditions: []
+    actions:
+      -
+        condition: "state"
+        entity_id: "binary_sensor.example_room_2_motion"
+        state: "off"
+      -
+        condition: "state"
+        entity_id: "switch.example_room_2_light"
+        state: "on"
+      -
+        delay:
+          minutes: 4
+      -
+        condition: "state"
+        entity_id: "binary_sensor.example_room_2_motion"
+        state: "off"
+      -
+        condition: "state"
+        entity_id: "switch.example_room_2_light"
+        state: "on"
+      -
+        action: "switch.turn_off"
+        target:
+          entity_id: "switch.example_room_2_light"
+    mode: "restart"

@@ -73,3 +73,6 @@ The dashboard contains only the main page. Separate Heating and Camera tabs were
 ## Version 1.2
 
 Portrait phones stack panels vertically and cameras scroll horizontally. Touch controls and dialogs adapt to small screens. Browser verified at 393, 852 and 960 CSS pixel widths.
+
+## Motion-controlled lights
+Optional `packages/cellar_motion.yaml` maps two motion sensors to two lights. Replace all `example_room_*` entities and enable packages. Motion turns on; four minutes of sensor off turns off. Manual on while clear starts a fresh countdown; motion cancels it. Unknown/unavailable sensors never turn lights off. The interval starts when the sensor reports clear. HA restart begins a fresh countdown; automation reload cancels pending countdowns. Keep physical Shelly buttons paired locally with their outputs. Test physical motion and manual on after installation.
