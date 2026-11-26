@@ -8,7 +8,7 @@ Vlastní trvale tmavý dashboard určený pro tablet položený na šířku. Hla
 
 ## Co obsahuje
 
-- teplotní trendy používají časově vážené půlhodinové průměry za 24 hodin a minimální rozsah osy 5 °C, aby drobné kolísání nebylo opticky přehnané
+- teplotní trendy používají časově vážené půlhodinové průměry za 24 hodin a minimální rozsah osy 2 °C, aby drobné kolísání nebylo opticky přehnané
 - interaktivní sedmidenní graf: klepnutí na den zobrazí jeho spotřeby a náklady; tlačítko Dnes vrátí živé údaje
 - hodiny se sekundami, datum a vnitřní i venkovní teplotu
 - tři kamery, tři světla, spotřeby, teploty a stav domácnosti

@@ -6,7 +6,7 @@ A custom, permanently dark Home Assistant dashboard designed for a landscape kit
 
 ## Highlights
 
-- 24-hour temperature trends use time-weighted half-hour averages and a minimum 5 °C vertical range to avoid exaggerating small fluctuations
+- 24-hour temperature trends use time-weighted half-hour averages and a minimum 2 °C vertical range to avoid exaggerating small fluctuations
 - interactive seven-day chart: select a day to show its consumption and costs; Today returns to live readings
 - responsive landscape layout tested at 960 × 600 and 1280 × 800 CSS pixels
 - clock with seconds, date, indoor/outdoor temperature and seven-day cost chart
